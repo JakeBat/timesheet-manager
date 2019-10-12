@@ -8,14 +8,14 @@ import { DynamoDB, AWSError } from 'aws-sdk';
 export const dynamoDb = new DynamoDB();
 export const createDynamodbObject:any  = DynamoDB.Converter.marshall;
 export const parseDynamodbObject:any = DynamoDB.Converter.unmarshall;
-export const TableName = 'insight-database'
+export const TableName = 'timesheet'
 
 export function getItem<T>(params):Promise<T> {
     return new Promise((res,err) =>{
         const dynamoParams:DynamoDB.Types.GetItemInput = {TableName, Key:{...createDynamodbObject(params)}}
         dynamoDb.getItem(dynamoParams, (error, response) => {
             checkError(error);
-            if(!response.Item) {
+            if(!response || !response.Item) {
                 return res(null)
             }
             return res(parseDynamodbObject(response.Item));
@@ -78,7 +78,7 @@ export function createDeleteRequest(item) {
 
 function checkError(error) {
     if(error) {
-
+        console.error(error)
     }
 }
 export const personId = '4'

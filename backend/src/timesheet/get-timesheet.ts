@@ -5,9 +5,9 @@ import { getItem, personId, getUserId } from '../backend-helpers';
 import * as moment from 'moment';
 
 export const handler:Handler = async (event: APIGatewayEvent, context:Context, response:Callback) => {
-    const date = event.queryStringParameters.date;
+    const date = (event.queryStringParameters || {}).date;
     const userId = getUserId(event);
-    if(date) {
+    if(!date) {
         return createResponse(400, 'date is a required query parameter')
     }
     if(!moment(date).isValid()) {
