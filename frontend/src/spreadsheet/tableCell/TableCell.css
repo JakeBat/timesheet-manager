@@ -1,0 +1,5 @@
+.table-cell {
+    flex: 1 1 0;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}

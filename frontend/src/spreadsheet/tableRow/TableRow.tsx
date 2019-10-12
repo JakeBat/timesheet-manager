@@ -1,9 +1,12 @@
 import React from 'react';
-import './TableRow.css.css';
+import './TableRow.css';
+import TableCell from '../tableCell/TableCell'
 
-const tableRow = () => {
+const tableRow = ({data}) => {
     return (
-        <div></div>
+        <div className="table-row">
+            {Object.keys(data).map(key => <TableCell content={data[key]}/>)}
+        </div>
     )
 };
 

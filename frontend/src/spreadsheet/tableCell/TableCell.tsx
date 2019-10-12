@@ -1,9 +1,9 @@
 import React from 'react';
 import './TableCell.css';
 
-const tableCell = () => {
+const tableCell = ({content}) => {
     return (
-        <div></div>
+        <div className="table-cell">{content}</div>
     )
 };
 
