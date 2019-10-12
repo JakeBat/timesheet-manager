@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"timesheetfrontend074f35bf": {
+		"timesheet2173aee7": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
