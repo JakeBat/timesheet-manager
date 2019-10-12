@@ -1,10 +1,15 @@
 import React from 'react';
-import './TableHeader.css';
+import './HeaderRow.css';
+import HeaderCell from '../headerCell/HeaderCell'
 
-const tableHeader = () => {
+const headers = ['Start Time', 'End Time', 'Issue', 'Comment', 'Time Spent', 'Issue Total', 'Day Total'];
+
+const headerRow = (props) => {
     return(
-        <div></div>
+        <div className='header-row'>
+            {headers.map(header => (<HeaderCell title={header}/>))}
+        </div>
     )
 };
 
-export default tableHeader;
+export default headerRow;

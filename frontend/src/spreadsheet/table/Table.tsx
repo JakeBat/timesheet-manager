@@ -1,11 +1,14 @@
 import React from 'react';
 import './Table.css';
-import TableHeader from '../tableHeader/TableHeader'
+import HeaderRow from '../headerRow/HeaderRow'
 
 const table = () => {
-  return (
+    return (
       <div>
-          <TableHeader></TableHeader>cv b
+          <HeaderRow/>
+          <div>
+
+          </div>
       </div>
   )
 };
