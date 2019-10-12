@@ -1,0 +1,51 @@
+service: timesheet-backend
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: us-west-2
+
+functions:
+  get-timesheet:
+    handler: timesheet/get-timesheet.handler
+    events:
+      - http:
+          path: timesheet
+          method: get
+          cors: true
+  upsert-timesheet:
+    handler: timesheet/upsert-timesheet.handler
+    events:
+      - http:
+          path: timesheet
+          method: post
+          cors: true
+
+
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+resources:
+  Resources:
+    timesheetDatabase:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: date
+          AttributeType: S
+        KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: date
+          KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: '1'
+          WriteCapacityUnits: '1'
+        TableName: timesheet

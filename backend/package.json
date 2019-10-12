@@ -1,0 +1,21 @@
+{
+  "name": "insights-backend",
+  "version": "1.0.0",
+  "description": "Serverless CRUD service exposing a REST HTTP interface",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "rxjs": "^6.5.3"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.27",
+    "@types/lodash": "^4.14.135",
+    "aws-sdk": "2.483.0",
+    "serverless-offline": "5.5.0",
+    "serverless-plugin-typescript": "^1.1.7",
+    "typescript": "^3.5.2",
+    "uuid": "2.0.3"
+  }
+}
