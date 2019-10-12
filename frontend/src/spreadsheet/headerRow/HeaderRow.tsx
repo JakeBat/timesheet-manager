@@ -1,13 +1,13 @@
 import React from 'react';
 import './HeaderRow.css';
 import HeaderCell from '../headerCell/HeaderCell'
+import {Column} from "../../model/table-model";
 
-const headers = ['Start Time', 'End Time', 'Issue', 'Comment', 'Time Spent', 'Issue Total', 'Day Total'];
 
-const headerRow = (props) => {
-    return(
+const headerRow = ({columns}: { columns: Column[] }) => {
+    return (
         <div className='header-row'>
-            {headers.map(header => (<HeaderCell title={header}/>))}
+            {columns.map(column => (<HeaderCell title={column.title}/>))}
         </div>
     )
 };
