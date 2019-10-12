@@ -9,14 +9,14 @@ provider:
 
 functions:
   get-timesheet:
-    handler: timesheet/get-timesheet.handler
+    handler: src/timesheet/get-timesheet.handler
     events:
       - http:
           path: timesheet
           method: get
           cors: true
   upsert-timesheet:
-    handler: timesheet/upsert-timesheet.handler
+    handler: src/timesheet/upsert-timesheet.handler
     events:
       - http:
           path: timesheet

@@ -6,14 +6,14 @@ import * as moment from 'moment';
 
 export const handler:Handler = async (event: APIGatewayEvent, context:Context, response:Callback) => {
     const date = event.queryStringParameters.date;
-    const userId = getUserId();
+    const userId = getUserId(event);
     if(date) {
         return createResponse(400, 'date is a required query parameter')
     }
     if(!moment(date).isValid()) {
         return createResponse(400, `date must be provided yyyy-mm-dd. date that was recieved ${date}`)
     }
-    let timesheet = await getItem<Timesheet>({userId:getUserId(), date});
+    let timesheet = await getItem<Timesheet>({userId, date});
     if(timesheet === null){
         timesheet = {
             userId,

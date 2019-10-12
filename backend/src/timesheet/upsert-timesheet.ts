@@ -9,7 +9,7 @@ export const handler:Handler = async (event: APIGatewayEvent, context:Context, r
         return createResponse(400, 'Missing body off post request')
     }
     const timesheet = JSON.parse(event.body);
-    timesheet.userId = getUserId();
+    timesheet.userId = getUserId(event);
     await putItem(timesheet);
     return createResponse(200, timesheet);
 }
