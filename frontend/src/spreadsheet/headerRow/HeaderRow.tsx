@@ -4,12 +4,12 @@ import HeaderCell from '../headerCell/HeaderCell'
 import {Column} from "../../model/table-model";
 
 
-const headerRow = ({columns}: { columns: Column[] }) => {
+const HeaderRow = ({columns}: { columns: Column[] }) => {
     return (
         <div className='header-row'>
-            {columns.map(column => (<HeaderCell title={column.title}/>))}
+            {columns.map((column, index) => <HeaderCell key={index} title={column.title}/>)}
         </div>
     )
 };
 
-export default headerRow;
+export default HeaderRow;
