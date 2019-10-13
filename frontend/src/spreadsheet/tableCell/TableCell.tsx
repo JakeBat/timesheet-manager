@@ -2,7 +2,7 @@ import React from 'react';
 import './TableCell.css';
 import {Column} from '../../model/table-model';
 
-const tableCell = ({column, content, handler}: {column: Column, content: string, handler}) => {
+const TableCell = ({key, column, content, handler}: {key: number, column: Column, content: string, handler}) => {
     let cell;
 
     switch (column.input) {
@@ -26,4 +26,4 @@ const tableCell = ({column, content, handler}: {column: Column, content: string,
     return cell
 };
 
-export default tableCell;
+export default TableCell;

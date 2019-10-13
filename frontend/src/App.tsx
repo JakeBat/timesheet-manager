@@ -41,14 +41,14 @@ function App() {
 
 function createEmptyDataRow(): DataRow {
     return {
-        company: "TA",
-        startTime: 'st',
-        endTime: 'et',
-        issue: 'is',
-        comment: 'comment',
-        issueTotal: 'ist',
-        timeSpent: 'ts',
-        dayTotal: 'dt'
+        company: 'AV',
+        startTime: '',
+        endTime: '',
+        issue: '',
+        comment: '',
+        issueTotal: '',
+        timeSpent: '',
+        dayTotal: ''
     }
 }
 
