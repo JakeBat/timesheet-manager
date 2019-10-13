@@ -2,32 +2,17 @@ import React from 'react';
 import './Table.css';
 import HeaderRow from '../headerRow/HeaderRow'
 import TableRow from '../tableRow/TableRow'
+import {Column, DataRow} from "../../model/table-model";
 
-const table = ({data, columns}:{data: DataRow[], columns: Column[]}) => {
+const table = ({data, columns}: { data: DataRow[], columns: Column[] }) => {
     return (
         <div>
-            <HeaderRow/>
+            <HeaderRow columns={columns}/>
             <div>
-                {data.map(row => <TableRow data={row}/>)}
+                {data.map(row => <TableRow data={row} columns={columns}/>)}
             </div>
         </div>
     )
 };
 
 export default table;
-
-export interface DataRow {
-    startTime: string;
-    endTime: string;
-    issue: string;
-    comment: string;
-    timeSpent: string;
-    issueTotal: string;
-    dayTotal: string;
-}
-
-export interface Column {
-    title: string,
-    isEditable: boolean
-
-}
