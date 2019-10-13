@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-// @ts-ignore
 import ReactModal from 'react-modal';
 import './App.css';
 import Amplify from 'aws-amplify';
