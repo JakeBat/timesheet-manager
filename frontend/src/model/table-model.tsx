@@ -11,6 +11,6 @@ export interface DataRow {
 
 export interface Column {
     title: string,
-    input: 'none' | 'text' | 'select';
+    input?: 'none' | 'text' | 'select';
     valueKey: string;
 }

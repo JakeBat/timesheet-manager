@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import ReactModal from 'react-modal';
 import './App.css';
 import Amplify from 'aws-amplify';
@@ -13,6 +13,7 @@ import {Column, DataRow} from './model/table-model';
 Amplify.configure(awsconfig);
 
 function App() {
+
     const [isOpen, setIsOpen] = useState(false);
     const emptyTimesheet = {userId: '', date: '2019-03-20', timesheetEntries: []};
     const data: DataRow[] = [createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow()];
@@ -51,5 +52,25 @@ function createEmptyDataRow(): DataRow {
         dayTotal: 'dt'
     }
 }
-
-export default withAuthenticator(App, true);
+const signUpConfig = {
+    header: 'Welcome to Timesheet',
+    hideAllDefaults: true,
+    defaultCountryCode: '1',
+    signUpFields: [
+      {
+        label: 'Email',
+        key: 'username',
+        required: true,
+        displayOrder: 1,
+        type: 'string'
+      },
+      {
+        label: 'Password',
+        key: 'password',
+        required: true,
+        displayOrder: 2,
+        type: 'password'
+      }
+    ]
+}
+export default withAuthenticator(App, {signUpConfig});
