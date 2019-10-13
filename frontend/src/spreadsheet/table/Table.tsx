@@ -9,7 +9,7 @@ const table = ({data, columns}: { data: DataRow[], columns: Column[] }) => {
         <div>
             <HeaderRow columns={columns}/>
             <div>
-                {data.map(row => <TableRow data={row} columns={columns}/>)}
+                {data.map(row => <TableRow row={row} columns={columns}/>)}
             </div>
         </div>
     )

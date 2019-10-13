@@ -1,4 +1,5 @@
 export interface DataRow {
+    company: 'TA' | 'AV';
     startTime: string;
     endTime: string;
     issue: string;
@@ -10,5 +11,6 @@ export interface DataRow {
 
 export interface Column {
     title: string,
-    isEditable: boolean
+    input: 'none' | 'text' | 'select';
+    valueKey: string;
 }

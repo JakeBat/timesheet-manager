@@ -1,43 +1,48 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+// @ts-ignore
 import ReactModal from 'react-modal';
 import './App.css';
-import Amplify, {Auth} from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
-import { Column, DataRow } from "./model/table-model";
-import { withAuthenticator } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
+import {withAuthenticator} from 'aws-amplify-react'; // or 'aws-amplify-react-native';
 import Table from './spreadsheet/table/Table'
-import { TimesheetButtons } from './timesheet-button';
-import { Summary } from './summary';
+import {TimesheetButtons} from './timesheet-button';
+import {Summary} from './summary';
+// @ts-ignore
+import {Column, DataRow} from './model/table-model';
+
 Amplify.configure(awsconfig);
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
-  const emptyTimesheet = {userId:'', date:'2019-03-20', timesheetEntries:[]}
-  const data: DataRow[] = [createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow()];
-  const columns: Column[] = [
-      {title: 'Start Time', isEditable: true},
-      {title: 'End Time', isEditable: true},
-      {title: 'Issue', isEditable: true},
-      {title: 'Comment', isEditable: true},
-      {title: 'Time Spent', isEditable: false},
-      {title: 'Issue Total', isEditable: false},
-      {title: 'Day Total', isEditable: false}
-      ];
+    const [isOpen, setIsOpen] = useState(false);
+    const emptyTimesheet = {userId: '', date: '2019-03-20', timesheetEntries: []};
+    const data: DataRow[] = [createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow()];
+    const columns: Column[] = [
+        {title: 'Company', input: 'select', valueKey: 'company'},
+        {title: 'Start Time', input: 'text', valueKey: 'startTime'},
+        {title: 'End Time', input: 'text', valueKey: 'endTime'},
+        {title: 'Issue', input: 'text', valueKey: 'issue'},
+        {title: 'Comment', input: 'text', valueKey: 'comment'},
+        {title: 'Time Spent', input: 'none', valueKey: 'timeSpent'},
+        {title: 'Issue Total', input: 'none', valueKey: 'issueTotal'},
+        {title: 'Day Total', input: 'none', valueKey: 'dayTotal'}
+    ];
 
-  return (
-    <div className="App">
-      <Table data={data} columns={columns}/>
-      <TimesheetButtons openSummary={()=> setIsOpen(true)}/>
-      <ReactModal isOpen={isOpen}>
-        <Summary closeModal={() => setIsOpen(false)} timesheet={emptyTimesheet}/>
-      </ReactModal>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Table data={data} columns={columns}/>
+            <TimesheetButtons openSummary={() => setIsOpen(true)}/>
+            <ReactModal isOpen={isOpen}>
+                <Summary closeModal={() => setIsOpen(false)} timesheet={emptyTimesheet}/>
+            </ReactModal>
+        </div>
+    );
 }
 
 
 function createEmptyDataRow(): DataRow {
     return {
+        company: "TA",
         startTime: 'st',
         endTime: 'et',
         issue: 'is',
