@@ -17,9 +17,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "rootDir": "../"
   },
   "include": [
-    "src"
+    "src",
+    "../backend/src/shared/types"
   ]
 }
