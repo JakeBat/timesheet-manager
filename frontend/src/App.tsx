@@ -66,7 +66,7 @@ function createEmptyDataRow(): DataRow {
         issue: '',
         comment: '',
         get timeSpent() {
-            return convertToTimeSpent(this.startTime, this.endTime)
+            return (this.startTime != '' && this.endTime != '') ? convertToTimeSpent(this.startTime, this.endTime) : '';
         },
     }
 }

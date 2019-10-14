@@ -25,10 +25,10 @@ const TableCell = ({dataIndex, column, content, data, handler}: { dataIndex: num
         default:
             switch (column.valueKey) {
                 case "issueTotal":
-                    content = getIssueTotal(data, dataIndex);
+                    content = data[dataIndex].endTime != '' ? getIssueTotal(data, dataIndex) : '';
                     break;
                 case "dayTotal":
-                    content = getDayTotal(data, dataIndex);
+                    content = data[dataIndex].endTime != '' ? getDayTotal(data, dataIndex) : '';
                     break;
 
             }

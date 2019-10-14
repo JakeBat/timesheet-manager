@@ -28,11 +28,11 @@ export const convertToMinutes = (formattedTime) => {
             hours += 12;
         }
         hours *= 60;
-        return hours + formattedTime.substring(formattedTime.indexOf(":") + 1);
+        return hours + parseInt(formattedTime.substring(formattedTime.indexOf(":") + 1));
     } else {
         const hours = formattedTime.substring(0, formattedTime.indexOf("h")) * 60;
         const minutes = formattedTime.substring(formattedTime.indexOf("h") + 1, formattedTime.indexOf("m")).trim();
-        return hours + minutes;
+        return hours + parseInt(minutes);
     }
 };
 
