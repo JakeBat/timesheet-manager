@@ -5,8 +5,6 @@ export interface DataRow {
     issue: string;
     comment: string;
     timeSpent: string;
-    issueTotal: string;
-    dayTotal: string;
 }
 
 export interface Column {

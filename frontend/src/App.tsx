@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import ReactModal from 'react-modal';
 import './App.css';
 import Amplify from 'aws-amplify';
@@ -9,6 +9,7 @@ import {TimesheetButtons} from './timesheet-button';
 import {Summary} from './summary';
 // @ts-ignore
 import {Column, DataRow} from './model/table-model';
+import {convertToTimeSpent} from "./shared/utils";
 
 Amplify.configure(awsconfig);
 
@@ -47,30 +48,31 @@ function createEmptyDataRow(): DataRow {
         endTime: '',
         issue: '',
         comment: '',
-        issueTotal: '',
-        timeSpent: '',
-        dayTotal: ''
+        get timeSpent() {
+            return convertToTimeSpent(this.startTime, this.endTime)
+        },
     }
 }
+
 const signUpConfig = {
     header: 'Welcome to Timesheet',
     hideAllDefaults: true,
     defaultCountryCode: '1',
     signUpFields: [
-      {
-        label: 'Email',
-        key: 'username',
-        required: true,
-        displayOrder: 1,
-        type: 'string'
-      },
-      {
-        label: 'Password',
-        key: 'password',
-        required: true,
-        displayOrder: 2,
-        type: 'password'
-      }
+        {
+            label: 'Email',
+            key: 'username',
+            required: true,
+            displayOrder: 1,
+            type: 'string'
+        },
+        {
+            label: 'Password',
+            key: 'password',
+            required: true,
+            displayOrder: 2,
+            type: 'password'
+        }
     ]
 }
 export default withAuthenticator(App, {signUpConfig});

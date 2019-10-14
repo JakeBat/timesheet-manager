@@ -7,6 +7,8 @@ const formatMap = new Map([
     ['h', '^[1-9]$']
 ]);
 
+const ignoreTimeWords = ['break', 'lunch'];
+
 export const convertToTimeSpent = (formattedTime1, formattedTime2) => {
     const timeDiff = convertToMinutes(formattedTime2) - convertToMinutes(formattedTime1);
     return convertToHoursAndMinutes(timeDiff);
@@ -17,7 +19,6 @@ export const convertToHoursAndMinutes = (minutes) => {
 };
 
 export const convertToMinutes = (formattedTime) => {
-    console.log(formattedTime)
     if (formattedTime === '') {
         return 0;
     }
@@ -43,6 +44,32 @@ export const formatTimeValue = (value): string => {
         }
     });
     return formattedValue;
+};
+
+export const getIssueTotal = (data, index) => {
+    let totalMinutes = 0;
+    if (index === 0) {
+        totalMinutes += convertToMinutes(data[0].timeSpent);
+    } else {
+        data.slice(0, index + 1).filter(row =>
+            row.issue.toLowerCase() === data[index].issue.toLowerCase()
+        ).forEach(row => {
+            totalMinutes += convertToMinutes(row.timeSpent);
+        });
+    }
+    return convertToHoursAndMinutes(totalMinutes);
+};
+
+export const getDayTotal = (data, index) => {
+    let totalMinutes = 0;
+    if (index === 0) {
+        totalMinutes += convertToMinutes(data[0].timeSpent);
+    } else {
+        data.slice(0, index + 1).forEach(row => {
+            totalMinutes += convertToMinutes(row.timeSpent);
+        });
+    }
+    return convertToHoursAndMinutes(totalMinutes);
 };
 
 export const convertToHhMm = (currentFormat, value): string => {

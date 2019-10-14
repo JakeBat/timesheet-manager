@@ -1,8 +1,9 @@
 import React from 'react';
 import './TableCell.css';
-import {Column} from '../../model/table-model';
+import {Column, DataRow} from '../../model/table-model';
+import {getDayTotal, getIssueTotal} from "../../shared/utils";
 
-const TableCell = ({key, column, content, handler}: {key: number, column: Column, content: string, handler}) => {
+const TableCell = ({dataIndex, column, content, data, handler}: { dataIndex: number, column: Column, content: string, data: DataRow[], handler }) => {
     let cell;
 
     switch (column.input) {
@@ -16,10 +17,21 @@ const TableCell = ({key, column, content, handler}: {key: number, column: Column
             break;
         case 'text':
             cell = (
-                <input className='table-cell' type='text' onBlur={handler}/>
+                <div className='table-cell' key={content}>
+                    <input className='table-input' type='text' defaultValue={content} onBlur={handler}/>
+                </div>
             );
             break;
         default:
+            switch (column.valueKey) {
+                case "issueTotal":
+                    content = getIssueTotal(data, dataIndex);
+                    break;
+                case "dayTotal":
+                    content = getDayTotal(data, dataIndex);
+                    break;
+
+            }
             cell = <div className='table-cell'>{content}</div>;
     }
 
