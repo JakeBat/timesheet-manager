@@ -16,6 +16,11 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.react-datepicker {
+  position: absolute !important;
+  right: -115px;
+  top: 15px;
+}
 
 .App-link {
   color: #09d3ac;

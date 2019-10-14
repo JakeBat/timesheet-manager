@@ -10,10 +10,11 @@
     "aws-amplify": "^1.1.40",
     "aws-amplify-react": "^2.4.4",
     "react": "^16.10.2",
+    "react-datepicker": "^2.9.6",
     "react-dom": "^16.10.2",
+    "react-modal": "latest",
     "react-scripts": "3.2.0",
-    "typescript": "^3.6.4",
-    "react-modal": "latest"
+    "typescript": "^3.6.4"
   },
   "scripts": {
     "start": "react-scripts start",

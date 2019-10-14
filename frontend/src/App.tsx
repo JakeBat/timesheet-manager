@@ -7,6 +7,8 @@ import {withAuthenticator} from 'aws-amplify-react'; // or 'aws-amplify-react-na
 import Table from './spreadsheet/table/Table'
 import {TimesheetButtons} from './timesheet-button';
 import {Summary} from './summary';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 // @ts-ignore
 import {Column, DataRow} from './model/table-model';
 
@@ -15,6 +17,8 @@ Amplify.configure(awsconfig);
 function App() {
 
     const [isOpen, setIsOpen] = useState(false);
+    const [date, setDate] = useState(new Date());
+    const [isDatePickerOpen, setDatePickerOpen] = useState(false);
     const emptyTimesheet = {userId: '', date: '2019-03-20', timesheetEntries: []};
     const data: DataRow[] = [createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow()];
     const columns: Column[] = [
@@ -29,7 +33,20 @@ function App() {
     ];
 
     return (
-        <div className="App">
+        <div className="App" onClick={() => setDatePickerOpen(false)}>
+            <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+                <i className="material-icons" style={{marginRight:'5px', cursor:'pointer'}} onClick={() => setDate(new Date(date.setDate(date.getDate()-1)))}>chevron_left</i>
+                <span style={{fontSize:'24px'}}>{date.toDateString()}</span>
+                <i className="material-icons" style={{marginLeft:'5px', cursor:'pointer'}} onClick={() => setDate(new Date(date.setDate(date.getDate()-1)))}>chevron_right</i>
+                <i className="material-icons" style={{marginLeft:'5px', cursor:'pointer'}} onClick={(event) => {
+                    event.stopPropagation();
+                    setDatePickerOpen(!isDatePickerOpen)
+                }}>calendar_today</i>
+                {isDatePickerOpen && <div style={{position:'relative'}}>
+                    <DatePicker inline selected={date} onChange={setDate}/>
+                </div>}
+            </div>
+
             <Table data={data} columns={columns}/>
             <TimesheetButtons openSummary={() => setIsOpen(true)}/>
             <ReactModal isOpen={isOpen}>
@@ -73,4 +90,4 @@ const signUpConfig = {
       }
     ]
 }
-export default withAuthenticator(App, {signUpConfig});
+export default withAuthenticator(App, {includeGreetings: true, signUpConfig});

@@ -7,5 +7,5 @@ interface ButtonProps {
     onClick:any,
 }
 export const Button = ({text, fontSize, onClick}:ButtonProps) => {
-    return <button onClick={onClick} style={{fontSize}}>{text}</button>
+    return <button className="button" onClick={onClick} style={{fontSize}}>{text}</button>
 }
