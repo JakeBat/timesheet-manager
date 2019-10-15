@@ -59,7 +59,6 @@ function App() {
                     <DatePicker inline selected={date} onChange={setDate}/>
                 </div>}
             </div>
-            {console.log(timesheet.timesheetEntries)}
             <Table data={timesheet.timesheetEntries} columns={columns} onDataChange={timesheetEntries => setTimesheet({...timesheet, timesheetEntries})}/>
             <TimesheetButtons openSummary={() => setIsOpen(true)}/>
             <ReactModal isOpen={isOpen}>
