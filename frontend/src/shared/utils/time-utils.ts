@@ -23,7 +23,7 @@ export const convertToMinutes = (formattedTime) => {
         return 0;
     }
     if (!formattedTime.includes("h") && !formattedTime.includes("m")) {
-        let hours = formattedTime.substring(0, formattedTime.indexOf(":"));
+        let hours = +formattedTime.substring(0, formattedTime.indexOf(":"));
         if (hours < 9) {
             hours += 12;
         }

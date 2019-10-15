@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ReactModal from 'react-modal';
+import {Provider} from 'react-redux';
+import store from './redux/store'
 import './App.css';
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
@@ -46,6 +48,7 @@ function App() {
         })
       }, [date]);
     return (
+        <Provider store={store}>
         <div className="App" onClick={() => setDatePickerOpen(false)}>
             <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
                 <i className="material-icons" style={{marginRight:'5px', cursor:'pointer'}} onClick={() => setDate(new Date(date.setDate(date.getDate()-1)))}>chevron_left</i>
@@ -66,6 +69,7 @@ function App() {
                 <Summary closeModal={() => setIsOpen(false)} timesheet={emptyTimesheet}/>
             </ReactModal>
         </div>
+        </Provider>
     );
 }
 
