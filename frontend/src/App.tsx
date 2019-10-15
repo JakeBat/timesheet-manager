@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactModal from 'react-modal';
 import './App.css';
 import Amplify from 'aws-amplify';
@@ -11,7 +11,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // @ts-ignore
 import {Column, DataRow} from './model/table-model';
-import {convertToTimeSpent} from "./shared/utils";
+import { convertToTimeSpent, formatDate} from "./shared/utils";
+import { get } from './shared';
 
 Amplify.configure(awsconfig);
 
@@ -21,7 +22,6 @@ function App() {
     const [date, setDate] = useState(new Date());
     const [isDatePickerOpen, setDatePickerOpen] = useState(false);
     const emptyTimesheet = {userId: '', date: '2019-03-20', timesheetEntries: []};
-    const data: DataRow[] = [createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow(), createEmptyDataRow()];
     const columns: Column[] = [
         {title: 'Company', input: 'select', valueKey: 'company'},
         {title: 'Start Time', input: 'text', valueKey: 'startTime'},
@@ -32,7 +32,19 @@ function App() {
         {title: 'Issue Total', input: 'none', valueKey: 'issueTotal'},
         {title: 'Day Total', input: 'none', valueKey: 'dayTotal'}
     ];
+    const [timesheet, setTimesheet] = useState({userId: '', date: '', timesheetEntries: []});
 
+    useEffect(() => {
+        get(`?date=${formatDate(date)}`).then((timesheet) => {
+            timesheet.timesheetEntries = timesheet.timesheetEntries.map(entry => ({
+                ...entry,
+                get timeSpent() {
+                    return (this.startTime != '' && this.endTime != '') ? convertToTimeSpent(this.startTime, this.endTime) : '';
+                }
+            }));
+            setTimesheet(timesheet);
+        })
+      }, [date]);
     return (
         <div className="App" onClick={() => setDatePickerOpen(false)}>
             <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
@@ -47,8 +59,8 @@ function App() {
                     <DatePicker inline selected={date} onChange={setDate}/>
                 </div>}
             </div>
-
-            <Table data={data} columns={columns}/>
+            {console.log(timesheet.timesheetEntries)}
+            <Table data={timesheet.timesheetEntries} columns={columns} onDataChange={timesheetEntries => setTimesheet({...timesheet, timesheetEntries})}/>
             <TimesheetButtons openSummary={() => setIsOpen(true)}/>
             <ReactModal isOpen={isOpen}>
                 <Summary closeModal={() => setIsOpen(false)} timesheet={emptyTimesheet}/>

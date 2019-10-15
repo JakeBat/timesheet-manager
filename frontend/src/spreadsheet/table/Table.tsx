@@ -5,36 +5,34 @@ import TableRow from '../tableRow/TableRow'
 import {Column, DataRow} from "../../model/table-model";
 import {formatTimeValue} from "../../shared/utils";
 
-const Table = ({data, columns}: { data: DataRow[], columns: Column[] }) => {
-    const [currentData, setCurrentData] = useState(data);
+const Table = ({data, columns, onDataChange}: { data: DataRow[], columns: Column[], onDataChange?:Function }) => {
 
     const handleTextInput = (event, column: Column, index: number) => {
         const fieldValue = event.target.value;
 
         switch (column.valueKey) {
             case 'startTime':
-                currentData[index].startTime = formatTimeValue(fieldValue);
+                data[index].startTime = formatTimeValue(fieldValue);
                 break;
             case 'endTime':
-                currentData[index].endTime = formatTimeValue(fieldValue);
-                currentData[index + 1].startTime = currentData[index].endTime;
+                data[index].endTime = formatTimeValue(fieldValue);
+                data[index + 1].startTime = data[index].endTime;
                 break;
             case 'issue':
-                currentData[index].issue = fieldValue;
+                data[index].issue = fieldValue;
                 break;
             case 'comment':
-                currentData[index].comment = fieldValue;
+                data[index].comment = fieldValue;
         }
-        console.log(currentData);
-        setCurrentData([...currentData]);
+        onDataChange(data);
     };
 
     return (
         <div>
             <HeaderRow columns={columns}/>
             <div>
-                {currentData.map((row, index) => <TableRow key={index} dataIndex={index} row={row} columns={columns}
-                                                           data={currentData} handler={handleTextInput}/>)}
+                {data.map((row, index) => <TableRow key={index} dataIndex={index} row={row} columns={columns}
+                                                           data={data} handler={handleTextInput}/>)}
             </div>
         </div>
     )

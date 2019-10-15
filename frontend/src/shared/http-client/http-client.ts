@@ -8,10 +8,10 @@ export const baseUrl = 'http://localhost:3001/timesheet'
 
 const httpRequest = (type) => {
 
-    return async (body) => {
+    return async (restOfUrl, body?) => {
         const headers = {headers:{authorization:await getAccessToken()}};
 
-        const response =  await axios[type](baseUrl, type === 'get' ? headers : body, headers);
+        const response =  await axios[type](`${baseUrl}${restOfUrl}`, type === 'get' ? headers : body, headers);
         return response.data;
     }
 }
