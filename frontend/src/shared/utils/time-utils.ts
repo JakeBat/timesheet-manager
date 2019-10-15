@@ -15,7 +15,7 @@ export const convertToTimeSpent = (formattedTime1, formattedTime2) => {
 };
 
 export const convertToHoursAndMinutes = (minutes) => {
-    return minutes / 60 + "h " + minutes % 60 + "m";
+    return Math.trunc(minutes / 60) + "h " + minutes % 60 + "m";
 };
 
 export const convertToMinutes = (formattedTime) => {
