@@ -21,7 +21,7 @@ Amplify.configure(awsconfig);
 function App() {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - 1)));
     const [isDatePickerOpen, setDatePickerOpen] = useState(false);
     const emptyTimesheet = {userId: '', date: '2019-03-20', timesheetEntries: []};
     const columns: Column[] = [
