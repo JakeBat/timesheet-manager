@@ -18,11 +18,14 @@ export const convertToTimeSpent = (formattedTime1, formattedTime2) => {
 };
 
 export const convertToHoursAndMinutes = (minutes) => {
+    if (minutes < 0) {
+        return '0h 0m'
+    }
     return Math.trunc(minutes / 60) + "h " + minutes % 60 + "m";
 };
 
 export const convertToMinutes = (formattedTime) => {
-    if (formattedTime === '') {
+    if (!formattedTime) {
         return 0;
     }
     if (!formattedTime.includes("h") && !formattedTime.includes("m")) {
@@ -55,7 +58,7 @@ export const getIssueTotal = (data, index) => {
         totalMinutes += convertToMinutes(data[0].timeSpent);
     } else {
         data.slice(0, index + 1).filter(row =>
-            row.issue.toLowerCase() === data[index].issue.toLowerCase()
+            row.issue && data[index].issue ? row.issue.toLowerCase() === data[index].issue.toLowerCase() : false
         ).forEach(row => {
             totalMinutes += convertToMinutes(row.timeSpent);
         });
