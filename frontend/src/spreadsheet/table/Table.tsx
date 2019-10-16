@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Table.css';
 import HeaderRow from '../headerRow/HeaderRow'
 import TableRow from '../tableRow/TableRow'
 import {Column, DataRow} from "../../model/table-model";
 import {formatTimeValue} from "../../shared/utils";
 
-const Table = ({data, columns, onDataChange}: { data: DataRow[], columns: Column[], onDataChange?:Function }) => {
+const Table = ({data, columns, onDataChange}: { data: DataRow[], columns: Column[], onDataChange?: Function }) => {
 
     const handleTextInput = (event, column: Column, index: number) => {
         const fieldValue = event.target.value;
@@ -16,7 +16,9 @@ const Table = ({data, columns, onDataChange}: { data: DataRow[], columns: Column
                 break;
             case 'endTime':
                 data[index].endTime = formatTimeValue(fieldValue);
-                data[index + 1].startTime = data[index].endTime;
+                if (index >= data.length) {
+                    data[index + 1].startTime = data[index].endTime;
+                }
                 break;
             case 'issue':
                 data[index].issue = fieldValue;
@@ -32,7 +34,7 @@ const Table = ({data, columns, onDataChange}: { data: DataRow[], columns: Column
             <HeaderRow columns={columns}/>
             <div>
                 {data.map((row, index) => <TableRow key={index} dataIndex={index} row={row} columns={columns}
-                                                           data={data} handler={handleTextInput}/>)}
+                                                    data={data} handler={handleTextInput}/>)}
             </div>
         </div>
     )
