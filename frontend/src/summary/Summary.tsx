@@ -4,7 +4,7 @@ import { Button, Input } from '../shared';
 import { groupBy } from 'lodash';
 import { Column, DataRow } from '../model/table-model';
 import Table from '../spreadsheet/table/Table';
-import {convertToTimeSpentMinutes } from '../shared/utils/time-utils';
+import {convertToTimeSpentMinutes, convertToHoursAndMinutes } from '../shared/utils/time-utils';
 interface SummaryEntries {
     company,
     issue,
@@ -12,13 +12,18 @@ interface SummaryEntries {
     comments
 }
 const compileSummay = (entries:TimesheetEntries[]) => {
-    const entriesByIssue = groupBy(entries, 'issue')
-    return Object.keys(entriesByIssue).map((issue) => {
-        return entriesByIssue[issue].reduce<SummaryEntries>(({time, comments, ...acc}, {comment, startTime, endTime}) => {
+
+    const entriesByIssue = groupBy(entries, 'issue');
+    const issues = Object.keys(entriesByIssue);
+    return issues.map((issue) => {
+        const [{startTime, endTime, comment, company} , ...issueEntries] = entriesByIssue[issue]
+        const startingEntry = {time:convertToTimeSpentMinutes(startTime, endTime), comments:comment, company, issue}
+        return issueEntries.reduce<SummaryEntries>(({time, comments, ...acc}, {comment, startTime, endTime}) => {
             const timeSpent = convertToTimeSpentMinutes(startTime, endTime)
             return {...acc, comments: `${comments} / ${comment}`, time: time + timeSpent}
-        }, {time:0, comments:'', company:entriesByIssue[issue][0].company, issue})
-    });
+        }, startingEntry)
+    }).map(({time, ...entry}) => ({time:convertToHoursAndMinutes(time), ...entry}));
+
 }
 const columns: Column[] = [
     {title: 'Company', valueKey:'company'},

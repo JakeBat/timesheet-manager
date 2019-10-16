@@ -65,7 +65,7 @@ function App() {
             <Table data={timesheet.timesheetEntries} columns={columns} onDataChange={timesheetEntries => setTimesheet({...timesheet, timesheetEntries})}/>
             <TimesheetButtons openSummary={() => setIsOpen(true)}/>
             <ReactModal isOpen={isOpen}>
-                <Summary closeModal={() => setIsOpen(false)} timesheet={emptyTimesheet}/>
+                <Summary closeModal={() => setIsOpen(false)} timesheet={timesheet}/>
             </ReactModal>
         </div>
         </Provider>
