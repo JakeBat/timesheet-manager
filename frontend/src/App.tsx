@@ -49,7 +49,7 @@ function App() {
     return (
         <Provider store={store}>
             <div className="App" onClick={() => setDatePickerOpen(false)}>
-                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', margin:'10px 0px'}}>
                     <i className="material-icons" style={{marginRight: '5px', cursor: 'pointer'}}
                        onClick={() => setDate(new Date(date.setDate(date.getDate() - 1)))}>chevron_left</i>
                     <span style={{fontSize: '24px'}}>{date.toDateString()}</span>
@@ -63,17 +63,16 @@ function App() {
                         <DatePicker inline selected={date} onChange={setDate}/>
                     </div>}
                 </div>
-                {console.log(timesheet.timesheetEntries)}
                 <Table data={timesheet.timesheetEntries} columns={columns}
                        onDataChange={timesheetEntries => setTimesheet({...timesheet, timesheetEntries})}/>
                 <TimesheetButtons addRow={() => {
-                    post("", addEmptyRow(timesheet)).then(() => {
+                    post('', addEmptyRow(timesheet)).then(() => {
                         setTimesheet({...timesheet})
                     })
-                }} postTime={() => post("", timesheet).then(() => {
+                }} postTime={() => post('', timesheet).then(() => {
                     timesheet.timesheetEntries = timesheet.timesheetEntries.filter(entry => entry.endTime);
                     setTimesheet({...timesheet})
-                })} openSummary={() => setIsOpen(true)}/>
+                })} openSummary={() => setIsOpen(true)} clearTable={() => setTimesheet({...timesheet, timesheetEntries:[]})}/>
                 <ReactModal isOpen={isOpen}>
                     <Summary closeModal={() => setIsOpen(false)} timesheet={timesheet}/>
                 </ReactModal>

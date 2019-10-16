@@ -40,11 +40,11 @@ export const Summary = ({timesheet, closeModal}:{timesheet:Timesheet, closeModal
     let tmPassword = '';
     return (
         <div style={{display:'flex', flexDirection:'column', height:'100%'}}>
-            <div style={{display:'flex', justifyContent:'space-between', marginBottom:'10px', fontSize:'32px', flex:'0 0 auto'}}>
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', fontSize:'32px', flex:'0 0 auto', background:'#5d2061', color:'white', padding:'20px'}}>
                 <div>Review Summary</div>
-                <div onClick={() => closeModal()} style={{cursor:'pointer'}}>X</div>
+                <i onClick={() => closeModal()} style={{cursor:'pointer', fontSize:'32px'}} className="material-icons">close</i>
             </div>
-            <div style={{flex:'1 1 0px'}}>
+            <div style={{flex:'1 1 0px', padding:'10px'}}>
                 <Table data={summaryEntries} columns={columns}/>
             </div>
             <div style={{display:'flex', justifyContent:'space-around', marginBottom:'10px'}}>
