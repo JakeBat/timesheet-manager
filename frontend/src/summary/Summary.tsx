@@ -4,6 +4,7 @@ import { Button, Input } from '../shared';
 import { groupBy } from 'lodash';
 import { Column, DataRow } from '../model/table-model';
 import Table from '../spreadsheet/table/Table';
+import {convertToTimeSpentMinutes } from '../shared/utils/time-utils';
 interface SummaryEntries {
     company,
     issue,
@@ -14,7 +15,8 @@ const compileSummay = (entries:TimesheetEntries[]) => {
     const entriesByIssue = groupBy(entries, 'issue')
     return Object.keys(entriesByIssue).map((issue) => {
         return entriesByIssue[issue].reduce<SummaryEntries>(({time, comments, ...acc}, {comment, startTime, endTime}) => {
-            return {...acc, comments: `${comments} / ${comment}`, time}
+            const timeSpent = convertToTimeSpentMinutes(startTime, endTime)
+            return {...acc, comments: `${comments} / ${comment}`, time: time + timeSpent}
         }, {time:0, comments:'', company:entriesByIssue[issue][0].company, issue})
     });
 }

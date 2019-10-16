@@ -51,9 +51,9 @@ function App() {
         <Provider store={store}>
         <div className="App" onClick={() => setDatePickerOpen(false)}>
             <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-                <i className="material-icons" style={{marginRight:'5px', cursor:'pointer'}} onClick={() => setDate(new Date(date.setDate(date.getDate()-1)))}>chevron_left</i>
+                <i className="material-icons" style={{marginRight:'5px', cursor:'pointer'}} onClick={() => setDate(new Date(date.setDate(date.getDate() - 1)))}>chevron_left</i>
                 <span style={{fontSize:'24px'}}>{date.toDateString()}</span>
-                <i className="material-icons" style={{marginLeft:'5px', cursor:'pointer'}} onClick={() => setDate(new Date(date.setDate(date.getDate()-1)))}>chevron_right</i>
+                <i className="material-icons" style={{marginLeft:'5px', cursor:'pointer'}} onClick={() => setDate(new Date(date.setDate(date.getDate() + 1)))}>chevron_right</i>
                 <i className="material-icons" style={{marginLeft:'5px', cursor:'pointer'}} onClick={(event) => {
                     event.stopPropagation();
                     setDatePickerOpen(!isDatePickerOpen)
