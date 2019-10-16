@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button} from '../shared';
 
-export const TimesheetButtons = ({addRow, postTime, openSummary, clearTable}: { addRow: Function, postTime: Function, openSummary: Function, clearTable: Function }) => {
+export const TimesheetButtons = ({addRow, postTime, openSummary, clearTable}: { addRow: Function, postTime: Function, openSummary: Function, clearTable?: Function }) => {
     return (
         <div style={{display: 'flex', justifyContent: 'center', marginTop: '15px'}}>
             <div>

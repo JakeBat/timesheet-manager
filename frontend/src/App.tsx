@@ -37,6 +37,7 @@ function App() {
 
     useEffect(() => {
         get(`?date=${formatDate(date)}`).then((timesheet) => {
+            timesheet = makeTimesheetEntriesBig(timesheet);
             timesheet.timesheetEntries = timesheet.timesheetEntries.map(entry => ({
                 ...entry,
                 get timeSpent() {
@@ -49,7 +50,7 @@ function App() {
     return (
         <Provider store={store}>
             <div className="App" onClick={() => setDatePickerOpen(false)}>
-                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', margin:'10px 0px'}}>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                     <i className="material-icons" style={{marginRight: '5px', cursor: 'pointer'}}
                        onClick={() => setDate(new Date(date.setDate(date.getDate() - 1)))}>chevron_left</i>
                     <span style={{fontSize: '24px'}}>{date.toDateString()}</span>
@@ -63,16 +64,18 @@ function App() {
                         <DatePicker inline selected={date} onChange={setDate}/>
                     </div>}
                 </div>
+                {console.log(timesheet.timesheetEntries)}
                 <Table data={timesheet.timesheetEntries} columns={columns}
                        onDataChange={timesheetEntries => setTimesheet({...timesheet, timesheetEntries})}/>
                 <TimesheetButtons addRow={() => {
-                    post('', addEmptyRow(timesheet)).then(() => {
+                    post("", addEmptyRow(timesheet)).then(() => {
                         setTimesheet({...timesheet})
                     })
-                }} postTime={() => post('', timesheet).then(() => {
+                }} postTime={() => {
                     timesheet.timesheetEntries = timesheet.timesheetEntries.filter(entry => entry.endTime);
-                    setTimesheet({...timesheet})
-                })} openSummary={() => setIsOpen(true)} clearTable={() => setTimesheet({...timesheet, timesheetEntries:[]})}/>
+                    post("", timesheet).then(() => {
+                    setTimesheet({...makeTimesheetEntriesBig(timesheet)})
+                })}} openSummary={() => setIsOpen(true)}/>
                 <ReactModal isOpen={isOpen}>
                     <Summary closeModal={() => setIsOpen(false)} timesheet={timesheet}/>
                 </ReactModal>
@@ -85,14 +88,20 @@ function App() {
 function addEmptyRow(timesheet) {
     timesheet.timesheetEntries.push({
         company: 'AV',
-        startTime: timesheet.timesheetEntries[timesheet.timesheetEntries.length - 1].endTime || null,
+        startTime: timesheet.timesheetEntries[0] ? timesheet.timesheetEntries[timesheet.timesheetEntries.length - 1].endTime : null,
         endTime: null,
         issue: null,
         comment: null
     });
-    console.log(timesheet);
     return timesheet;
 }
+
+const makeTimesheetEntriesBig = (timesheet) => {
+    while(timesheet.timesheetEntries.length < 25) {
+        timesheet = addEmptyRow(timesheet)
+    }
+    return timesheet;
+};
 
 const signUpConfig = {
     header: 'Welcome to Timesheet',

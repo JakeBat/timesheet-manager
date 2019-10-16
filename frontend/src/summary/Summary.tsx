@@ -49,7 +49,7 @@ export const Summary = ({timesheet, closeModal}:{timesheet:Timesheet, closeModal
             </div>
             <div style={{display:'flex', justifyContent:'space-around', marginBottom:'10px'}}>
                 <div style={{display:'flex', flexDirection:'column', flex:'0 0 40%', fontSize:'18px', padding:'0px 15px', justifyContent:'center'}}>
-                    <div style={{width:'100%', marginBottom:'10px', fontSize:'20px'}}>AtralWho'sWhatsIT</div>
+                    <div style={{width:'100%', marginBottom:'10px', fontSize:'20px'}}>Aviata Credentials</div>
 
                     <div style={{display:'flex', marginBottom:'5px'}}>
                         <div style={{fontWeight:600, flex:'0 0 100px'}}>Username:</div>
@@ -62,7 +62,7 @@ export const Summary = ({timesheet, closeModal}:{timesheet:Timesheet, closeModal
                     </div>
                 </div>
                 <div style={{display:'flex', flexDirection:'column', flex:'0 0 40%', fontSize:'18px', padding:'0px 15px', justifyContent:'center'}}>
-                    <div style={{width:'100%', marginBottom:'10px', fontSize:'20px'}}>SomeOTherCompany</div>
+                    <div style={{width:'100%', marginBottom:'10px', fontSize:'20px'}}>TA Credentials</div>
 
                     <div style={{display:'flex', marginBottom:'5px'}}>
                         <div style={{fontWeight:600, flex:'0 0 100px'}}>Username:</div>

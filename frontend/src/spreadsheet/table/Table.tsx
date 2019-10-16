@@ -16,7 +16,7 @@ const Table = ({data, columns, onDataChange}: { data: DataRow[], columns: Column
                 break;
             case 'endTime':
                 data[index].endTime = formatTimeValue(fieldValue);
-                if (index >= data.length) {
+                if (index < data.length) {
                     data[index + 1].startTime = data[index].endTime;
                 }
                 break;
