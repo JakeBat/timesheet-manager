@@ -4,8 +4,8 @@
   "description": "Serverless CRUD service exposing a REST HTTP interface",
   "author": "",
   "license": "MIT",
-  "scripts":{
-    "start":"serverless offline --port 3001"
+  "scripts": {
+    "start": "serverless offline --port 3001"
   },
   "dependencies": {
     "lodash": "^4.17.11",

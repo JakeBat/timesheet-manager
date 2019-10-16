@@ -9,6 +9,7 @@ export const TimesheetButtons = ({openSummary}:{openSummary:Function}) => {
                 <Button text={'Clear Table'} onClick={()=>console.log('Need To Implement')}/>
                 <Button text={'View Summary'} fontSize="24px" onClick={openSummary}/>
                 <Button text={'Verify Hours'} onClick={()=>console.log('Need To Implement')}/>
+                <Button text={'Save'} onClick={openSummary}/>
             </div>
         </div>
     )

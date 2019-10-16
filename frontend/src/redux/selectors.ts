@@ -1,0 +1,1 @@
+export const getData = store => store.data;
