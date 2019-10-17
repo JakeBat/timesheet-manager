@@ -8,13 +8,13 @@ import awsconfig from './aws-exports';
 import {withAuthenticator} from 'aws-amplify-react'; // or 'aws-amplify-react-native';
 import Table from './spreadsheet/table/Table'
 import {TimesheetButtons} from './timesheet-button';
-import {Summary} from './summary';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // @ts-ignore
 import {Column} from './model/table-model';
 import {convertToTimeSpent, formatDate} from "./shared/utils";
 import {get, post} from './shared';
+import { SummaryModal } from './summary/SummaryModal';
 
 Amplify.configure(awsconfig);
 
@@ -77,7 +77,7 @@ function App() {
                     setTimesheet({...makeTimesheetEntriesBig(timesheet)})
                 })}} openSummary={() => setIsOpen(true)}/>
                 <ReactModal isOpen={isOpen}>
-                    <Summary closeModal={() => setIsOpen(false)} timesheet={{...timesheet, timesheetEntries:timesheet.timesheetEntries.filter(entry => entry.endTime)}}/>
+                    <SummaryModal closeModal={() => setIsOpen(false)} timesheet={{...timesheet, timesheetEntries:timesheet.timesheetEntries.filter(entry => entry.endTime)}}/>
                 </ReactModal>
             </div>
         </Provider>
