@@ -1,3 +1,6 @@
 .button-container {
     background: #5d2061;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
 }

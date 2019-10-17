@@ -5,14 +5,13 @@ import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
 import {withAuthenticator} from 'aws-amplify-react';
 import "react-datepicker/dist/react-datepicker.css";
-// @ts-ignore
-import Table from './components/table-components/table/Table'
+import Table from './components/shared/table/Table'
 import {TimesheetButtons} from './components/timesheet-button';
-import {Summary} from './components/summary';
 import {convertToTimeSpent, formatDate} from "./utils";
 import {get, post} from './http-client';
 import {DatePickerContainer} from "./components/date-picker/DatePickerContainer";
 import {signUpConfig, timesheetColumns} from "./variables";
+import {Summary} from "./components/summary/Summary";
 
 Amplify.configure(awsconfig);
 
@@ -21,6 +20,7 @@ const App = () => {
     const [date, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() === 1 ? 3 : 1))));
     const [isDatePickerOpen, setDatePickerOpen] = useState(false);
     const [timesheet, setTimesheet] = useState({userId: '', date: '', timesheetEntries: []});
+
 
     useEffect(() => {
         getTimesheetData(date, setTimesheet)
@@ -89,7 +89,6 @@ const getTimesheetData = (date, setTimesheet: Function) => {
         setTimesheet(timesheet);
     })
 };
-
 
 const addEmptyRow = (timesheet) => {
     timesheet.timesheetEntries.push({

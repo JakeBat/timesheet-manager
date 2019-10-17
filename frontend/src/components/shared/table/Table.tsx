@@ -1,7 +1,7 @@
 import React from 'react';
 import './Table.css';
-import HeaderRow from '../headerRow/HeaderRow'
-import TableRow from '../tableRow/TableRow'
+import HeaderRow from './headerRow/HeaderRow'
+import TableRow from './tableRow/TableRow'
 import {Column, DataRow} from "../../../model/table-model";
 import {formatTimeValue} from "../../../utils";
 

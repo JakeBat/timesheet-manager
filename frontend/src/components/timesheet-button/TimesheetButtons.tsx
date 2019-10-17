@@ -3,7 +3,7 @@ import {Button} from '../shared';
 
 export const TimesheetButtons = ({addRow, postTime, openSummary, clearTable}: { addRow: Function, postTime: Function, openSummary: Function, clearTable?: Function }) => {
     return (
-        <div className='button-container' style={{display: 'flex', justifyContent: 'center', marginTop: '15px'}}>
+        <div className='button-container'>
             <div>
                 <Button text={'Add Row'} onClick={addRow}/>
                 <Button text={'Clear Table'} onClick={clearTable}/>
@@ -13,4 +13,4 @@ export const TimesheetButtons = ({addRow, postTime, openSummary, clearTable}: { 
             </div>
         </div>
     )
-}
+};

@@ -1,0 +1,12 @@
+.invalid-text {
+    display: flex;
+    fontSize: 28px;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
+
+.invalid-close {
+    display: flex;
+    justify-content: center
+}

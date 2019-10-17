@@ -12,23 +12,28 @@
     font-size: calc(10px + 2vmin);
     color: white;
 }
-.material-icons:hover{
+
+.material-icons:hover {
     color: #FF9900
 }
+
 .react-datepicker {
     position: absolute !important;
     right: -115px;
     top: 15px;
 }
-.ReactModal__Content{
-    padding:0px !important;
+
+.ReactModal__Content {
+    padding: 0px !important;
 
 }
-#root>div:first-child>div:first-child {
+
+#root > div:first-child > div:first-child {
     background: #5d2061;
-    color:white;
+    color: white;
     border: none;
 }
+
 .App-link {
     color: #09d3ac;
 }

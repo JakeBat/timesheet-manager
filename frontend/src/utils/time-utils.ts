@@ -11,7 +11,7 @@ const ignoreTimeWords = ['break', 'lunch'];
 
 export const convertToTimeSpentMinutes = (formattedTime1, formattedTime2) => {
     return convertToMinutes(formattedTime2) - convertToMinutes(formattedTime1)
-}
+};
 export const convertToTimeSpent = (formattedTime1, formattedTime2) => {
     const timeDiff = convertToMinutes(formattedTime2) - convertToMinutes(formattedTime1);
     return convertToHoursAndMinutes(timeDiff);

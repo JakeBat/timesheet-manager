@@ -1,0 +1,16 @@
+.summary-table {
+    flex: 1 1 0;
+    padding: 10px
+}
+
+.summary-buttons {
+    display: flex;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+.credentials {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}

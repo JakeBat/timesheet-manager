@@ -1,0 +1,23 @@
+.date-picker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-icon {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.date {
+    fontSize: 24px;
+}
+
+.right-icon {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.calendar {
+    position: relative;
+}

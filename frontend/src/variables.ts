@@ -11,6 +11,13 @@ export const timesheetColumns: Column[] = [
     {title: 'Day Total', input: 'none', valueKey: 'dayTotal'}
 ];
 
+export const summaryColumns: Column[] = [
+    {title: 'Company', valueKey: 'company'},
+    {title: 'Issue', valueKey: 'issue'},
+    {title: 'Time', valueKey: 'time'},
+    {title: 'Comments', valueKey: 'comments'},
+];
+
 export const signUpConfig = {
     header: 'Welcome to Timesheet',
     hideAllDefaults: true,

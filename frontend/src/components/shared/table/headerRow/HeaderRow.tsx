@@ -1,6 +1,6 @@
 import React from 'react';
 import './HeaderRow.css';
-import HeaderCell from '../headerCell/HeaderCell'
+import HeaderCell from './headerCell/HeaderCell'
 import {Column} from "../../../model/table-model";
 
 
