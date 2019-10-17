@@ -2,8 +2,8 @@ import React from 'react';
 import './Table.css';
 import HeaderRow from '../headerRow/HeaderRow'
 import TableRow from '../tableRow/TableRow'
-import {Column, DataRow} from "../../model/table-model";
-import {formatTimeValue} from "../../shared/utils";
+import {Column, DataRow} from "../../../model/table-model";
+import {formatTimeValue} from "../../../utils";
 
 const Table = ({data, columns, onDataChange}: { data: DataRow[], columns: Column[], onDataChange?: Function }) => {
 
@@ -30,7 +30,7 @@ const Table = ({data, columns, onDataChange}: { data: DataRow[], columns: Column
     };
 
     return (
-        <div>
+        <div className='table'>
             <HeaderRow columns={columns}/>
             <div>
                 {data.map((row, index) => <TableRow key={index} dataIndex={index} row={row} columns={columns}

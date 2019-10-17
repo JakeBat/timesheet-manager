@@ -2,4 +2,7 @@
     flex: 1 1 0;
     border-left: 1px solid black;
     border-right: 1px solid black;
+    padding: 10px 0px;
+    background: #5d2061;
+    color: white;
 }
