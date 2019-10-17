@@ -34,10 +34,6 @@ function App() {
         {title: 'Day Total', input: 'none', valueKey: 'dayTotal'}
     ];
     const [timesheet, setTimesheet] = useState({userId: '', date: '', timesheetEntries: []});
-const filterTimesheet = () => {
-    timesheet.timesheetEntries = timesheet.timesheetEntries.filter(entry => entry.endTime);
-    setTimesheet({...timesheet})
-}
     useEffect(() => {
         get(`?date=${formatDate(date)}`).then((timesheet) => {
             timesheet = makeTimesheetEntriesBig(timesheet);
@@ -50,6 +46,7 @@ const filterTimesheet = () => {
             setTimesheet(timesheet);
         })
     }, [date]);
+    const filterEmptyEntries = (timesheet) => timesheet.timesheetEntries.filter(entry => entry.endTime)
     return (
         <Provider store={store}>
             <div className="App" onClick={() => setDatePickerOpen(false)}>
@@ -80,7 +77,7 @@ const filterTimesheet = () => {
                     setTimesheet({...makeTimesheetEntriesBig(timesheet)})
                 })}} openSummary={() => setIsOpen(true)}/>
                 <ReactModal isOpen={isOpen}>
-                    <Summary closeModal={() => setIsOpen(false)} timesheet={timesheet}/>
+                    <Summary closeModal={() => setIsOpen(false)} timesheet={{...timesheet, timesheetEntries:timesheet.timesheetEntries.filter(entry => entry.endTime)}}/>
                 </ReactModal>
             </div>
         </Provider>

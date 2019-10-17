@@ -45,6 +45,7 @@ export const Summary = ({timesheet, closeModal}:{timesheet:Timesheet, closeModal
                 <div>Review Summary</div>
                 <i onClick={() => closeModal()} style={{cursor:'pointer', fontSize:'32px'}} className="material-icons">close</i>
             </div>
+            <>
             <div style={{flex:'1 1 0px', padding:'10px'}}>
                 <Table data={summaryEntries} columns={columns}/>
             </div>
@@ -61,6 +62,7 @@ export const Summary = ({timesheet, closeModal}:{timesheet:Timesheet, closeModal
                     closeModal();
                 }}/>
             </div>
+            </>
 
         </div>
     )
