@@ -27,6 +27,7 @@
 #root>div:first-child>div:first-child {
     background: #5d2061;
     color:white;
+    border: none;
 }
 .App-link {
     color: #09d3ac;

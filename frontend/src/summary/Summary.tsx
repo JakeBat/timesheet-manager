@@ -5,6 +5,7 @@ import { groupBy } from 'lodash';
 import { Column, DataRow } from '../model/table-model';
 import Table from '../spreadsheet/table/Table';
 import {convertToTimeSpentMinutes, convertToHoursAndMinutes } from '../shared/utils/time-utils';
+import { Credentials } from './Credentials';
 interface SummaryEntries {
     company,
     issue,
@@ -17,10 +18,10 @@ const compileSummay = (entries:TimesheetEntries[]) => {
     const issues = Object.keys(entriesByIssue);
     return issues.map((issue) => {
         const [{startTime, endTime, comment, company} , ...issueEntries] = entriesByIssue[issue]
-        const startingEntry = {time:convertToTimeSpentMinutes(startTime, endTime), comments:comment, company, issue}
+        const startingEntry = {time:convertToTimeSpentMinutes(startTime, endTime), comments:comment || '', company, issue}
         return issueEntries.reduce<SummaryEntries>(({time, comments, ...acc}, {comment, startTime, endTime}) => {
             const timeSpent = convertToTimeSpentMinutes(startTime, endTime)
-            return {...acc, comments: `${comments} / ${comment}`, time: time + timeSpent}
+            return {...acc, comments: `${comments} / ${comment || ''}`, time: time + timeSpent}
         }, startingEntry)
     }).map(({time, ...entry}) => ({time:convertToHoursAndMinutes(time), ...entry}));
 
@@ -48,32 +49,8 @@ export const Summary = ({timesheet, closeModal}:{timesheet:Timesheet, closeModal
                 <Table data={summaryEntries} columns={columns}/>
             </div>
             <div style={{display:'flex', justifyContent:'space-around', marginBottom:'10px'}}>
-                <div style={{display:'flex', flexDirection:'column', flex:'0 0 40%', fontSize:'18px', padding:'0px 15px', justifyContent:'center'}}>
-                    <div style={{width:'100%', marginBottom:'10px', fontSize:'20px'}}>Aviata Credentials</div>
-
-                    <div style={{display:'flex', marginBottom:'5px'}}>
-                        <div style={{fontWeight:600, flex:'0 0 100px'}}>Username:</div>
-                        <input style={{flex:'1 1 0px'}} onChange={({target}) => avUsername = target.value}/>
-                    </div>
-
-                    <div style={{display:'flex', marginBottom:'5px'}}>
-                        <div style={{fontWeight:600, flex:'0 0 100px'}}>Password:</div>
-                        <input style={{flex:'1 1 0px'}} onChange={({target}) => avPassword = target.value}/>
-                    </div>
-                </div>
-                <div style={{display:'flex', flexDirection:'column', flex:'0 0 40%', fontSize:'18px', padding:'0px 15px', justifyContent:'center'}}>
-                    <div style={{width:'100%', marginBottom:'10px', fontSize:'20px'}}>TA Credentials</div>
-
-                    <div style={{display:'flex', marginBottom:'5px'}}>
-                        <div style={{fontWeight:600, flex:'0 0 100px'}}>Username:</div>
-                        <input style={{flex:'1 1 0px'}} onChange={({target}) => tmUsername = target.value}/>
-                    </div>
-
-                    <div style={{display:'flex', marginBottom:'5px'}}>
-                        <div style={{fontWeight:600, flex:'0 0 100px'}}>Password:</div>
-                        <input style={{flex:'1 1 0px'}} onChange={({target}) => tmUsername = target.value}/>
-                    </div>
-                </div>
+                <Credentials company="Aviata Credentials" userOnChange={({target}) => avUsername = target.value} passOnChange={({target}) => avPassword = target.value}/>
+                <Credentials company="TA Credentials" userOnChange={({target}) => tmUsername = target.value} passOnChange={({target}) => tmPassword = target.value}/>
             </div>
             <div style={{display:'flex', justifyContent:'center', flex:'0 0 auto'}}>
                 <Button text="Post Times" fontSize='24px' onClick={() => {

@@ -34,7 +34,10 @@ function App() {
         {title: 'Day Total', input: 'none', valueKey: 'dayTotal'}
     ];
     const [timesheet, setTimesheet] = useState({userId: '', date: '', timesheetEntries: []});
-
+const filterTimesheet = () => {
+    timesheet.timesheetEntries = timesheet.timesheetEntries.filter(entry => entry.endTime);
+    setTimesheet({...timesheet})
+}
     useEffect(() => {
         get(`?date=${formatDate(date)}`).then((timesheet) => {
             timesheet = makeTimesheetEntriesBig(timesheet);
