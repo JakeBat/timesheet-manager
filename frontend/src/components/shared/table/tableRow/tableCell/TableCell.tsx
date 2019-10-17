@@ -1,7 +1,7 @@
 import React from 'react';
 import './TableCell.css';
-import {Column, DataRow} from '../../../model/table-model';
-import {getDayTotal, getIssueTotal} from "../../../utils";
+import {Column, DataRow} from "../../../../../model/table-model";
+import {getDayTotal, getIssueTotal} from "../../../../../utils";
 
 const TableCell = ({dataIndex, column, content, data, handler}: { dataIndex: number, column: Column, content: string, data: DataRow[], handler }) => {
     let cell;
