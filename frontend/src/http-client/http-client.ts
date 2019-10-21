@@ -5,7 +5,7 @@ export const getAccessToken = () => {
     return Auth.currentSession().then((data) => data.getAccessToken().getJwtToken())
 };
 
-export const baseUrl = 'http://localhost:3001/timesheet';
+export const baseUrl = 'https://qwqhkkj8dc.execute-api.us-west-2.amazonaws.com/dev/timesheet';
 
 const httpRequest = (type) => {
 
