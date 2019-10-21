@@ -5,6 +5,8 @@
     border-top: none;
     border-bottom: none;
     width: 100%;
+    padding-left: 5px;
+    background: white;
 }
 
 .table-input {
@@ -14,4 +16,5 @@
     border: 0;
     padding: 0;
     width: 100%;
+    background: white;
 }

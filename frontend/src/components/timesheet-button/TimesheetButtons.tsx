@@ -1,6 +1,8 @@
 import React from 'react';
 import {Button} from '../shared';
 
+import './TimesheetButton.css'
+
 export const TimesheetButtons = ({addRow, postTime, openSummary, clearTable}: { addRow: Function, postTime: Function, openSummary: Function, clearTable?: Function }) => {
     return (
         <div className='button-container'>

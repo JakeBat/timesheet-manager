@@ -1,5 +1,6 @@
 import React from 'react'
 import {Button} from "../../shared/button";
+import './InvalidEntries.css'
 
 export const InvalidEntries = ({closeModal}: { closeModal: Function }) => (
     <div>

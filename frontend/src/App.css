@@ -1,16 +1,13 @@
-.App-logo {
-    height: 40vmin;
+#root {
+    height: 100%;
+    overflow: hidden;
+    background: #5d2061;
 }
 
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
+.App {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
 }
 
 .material-icons:hover {
@@ -28,14 +25,16 @@
 
 }
 
-#root > div:first-child > div:first-child {
-    background: #5d2061;
+.Toast__toast___XXr3v {
+    background: #FF9900 !important;
     color: white;
     border: none;
 }
 
-.App-link {
-    color: #09d3ac;
+.Nav__navBar___xtCFA {
+    background: #5d2061 !important;
+    color: white !important;
+    border: none !important;
 }
 
 body {

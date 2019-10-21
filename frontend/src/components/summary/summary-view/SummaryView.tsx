@@ -8,6 +8,7 @@ import Table from "../../shared/table/Table";
 import {Button} from "../../shared/button";
 import Credentials from "./credentials/Credentials";
 import {SummaryEntries} from "../../../model/summary-model";
+import './SummaryView.css'
 
 //TODO: fix data accept any array
 export const SummaryView = ({timesheetEntries, closeModal}: { timesheetEntries: TimesheetEntries[], closeModal: Function }) => {

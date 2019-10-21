@@ -55,7 +55,7 @@ const App = () => {
                 <Summary closeModal={() => setIsOpen(false)}
                          timesheet={{
                              ...timesheet,
-                             timesheetEntries: timesheet.timesheetEntries.filter(entry => entry.endTime)
+                             timesheetEntries: timesheet.timesheetEntries ? timesheet.timesheetEntries.filter(entry => entry.endTime) : [],
                          }}
                 />
             </ReactModal>

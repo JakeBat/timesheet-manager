@@ -2,5 +2,11 @@
     background: #5d2061;
     display: flex;
     justify-content: center;
-    margin-top: 15px;
+    height: 100%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
