@@ -10,7 +10,7 @@ export const baseUrl = 'https://qwqhkkj8dc.execute-api.us-west-2.amazonaws.com/d
 const httpRequest = (type) => {
 
     return async (restOfUrl, body?) => {
-        const headers = {headers: {authorization: await getAccessToken()}};
+        const headers = {headers: {Authorization: await getAccessToken()}};
         if (body) {
             body.timesheetEntries.forEach(entry => {
                 entry.startTime = entry.startTime ? entry.startTime : null;

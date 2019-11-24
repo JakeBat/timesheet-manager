@@ -25,7 +25,7 @@ export const signUpConfig = {
     signUpFields: [
         {
             label: 'Email',
-            key: 'username',
+            key: 'email',
             required: true,
             displayOrder: 1,
             type: 'string'

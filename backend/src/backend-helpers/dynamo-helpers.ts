@@ -1,8 +1,4 @@
-import { Handler, Context, Callback, APIGatewayEvent } from 'aws-lambda';
-import { Insight, DynamoInsight } from '../shared';
-import createResponse from '../shared/generate-response';
-import { dynamoInsightToInsight } from '../shared/dynamo-conversions';
-import { DynamoDB, AWSError } from 'aws-sdk';
+import {DynamoDB} from 'aws-sdk';
 
 
 export const dynamoDb = new DynamoDB();

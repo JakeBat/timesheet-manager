@@ -23,13 +23,16 @@ export const SummaryView = ({timesheetEntries, closeModal}: { timesheetEntries: 
                 <Table data={summaryEntries} columns={summaryColumns}/>
             </div>
             <div className='credentials'>
-                <Credentials company="Aviata Credentials" userOnChange={({target}) => avUsername = target.value}
+                <Credentials company="Aviata Credentials"
+                             userOnChange={({target}) => avUsername = target.value}
                              passOnChange={({target}) => avPassword = target.value}/>
-                <Credentials company="TA Credentials" userOnChange={({target}) => tmUsername = target.value}
+                <Credentials company="TA Credentials"
+                             userOnChange={({target}) => tmUsername = target.value}
                              passOnChange={({target}) => tmPassword = target.value}/>
             </div>
             <div className='summary-buttons'>
                 <Button text="Post Times" fontSize='24px' onClick={() => {
+                    console.log(summaryEntries)
                     const logsByType = groupBy(summaryEntries, 'company');
                     sendJiraRequests('https://aviatainc.atlassian.net/rest/api/2/issue', avUsername, avPassword, logsByType.AV);
                     sendJiraRequests('https://jira.truste.com/rest/api/2/issue', tmUsername, tmPassword, logsByType.TM);
@@ -68,11 +71,13 @@ const getBasicAuthHeader = (username, password) => ({
 });
 
 const sendJiraRequests = (baseUrl, username, password, logs) => {
-    return logs.map(({comments, time, issue}) => {
-        //TODO: old includes started do we need to?
-        return fetch(`${baseUrl}/${issue}/worklogs`, {
-            ...getBasicAuthHeader(username, password),
-            body: JSON.stringify({comments, timeSpent: time})
+    if (logs) {
+        return logs.map(({comments, time, issue}) => {
+            //TODO: old includes started do we need to?
+            return fetch(`${baseUrl}/${issue}/worklogs`, {
+                ...getBasicAuthHeader(username, password),
+                body: JSON.stringify({comments, timeSpent: time})
+            })
         })
-    })
+    }
 };

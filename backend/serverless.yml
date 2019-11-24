@@ -1,3 +1,5 @@
+org: jakebatchelor
+app: timesheet-backend-app
 service: timesheet-backend
 
 frameworkVersion: ">=1.1.0 <2.0.0"

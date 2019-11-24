@@ -108,4 +108,4 @@ const addEmptyRows = (timesheet) => {
     return timesheet;
 };
 
-export default withAuthenticator(App, {includeGreetings: true, signUpConfig});
+export default withAuthenticator(App, {includeGreetings: true, signUpConfig, usernameAttributes: 'email'});
