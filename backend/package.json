@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "rxjs": "^6.5.3",
     "serverless": "^1.54.0"
   },
